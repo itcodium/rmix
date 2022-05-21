@@ -11,10 +11,11 @@ import Hidden from '@mui/material/Hidden';
 import AppBar from '@mui/material/AppBar';
 import mainLogo from '../../assets/logo.png';
 import './NavBar.css';
+import CartWidget from '../CartWidget/CartWidget'
 
 const NavBar = () => {
     const menu = ['Bakery', 'Tortas', 'Desayunos'];
-    
+
     const getLogo = () => {
         return <Typography component="h2"
             variant="h5"
@@ -26,44 +27,44 @@ const NavBar = () => {
         </Typography>
     }
 
-    return <AppBar position="static" color="transparent" >
-        <Toolbar>
-            <Hidden mdUp>
-                <Grid container>
-                    <Grid item xs={6}>
-                        {getLogo()}
+    return  <AppBar position="static" color="transparent" className='container' >
+            <Toolbar>
+                <Hidden mdUp>
+                    <Grid container>
+                        <Grid item xs={6}>
+                            {getLogo()}
+                        </Grid>
+                        <Grid item xs={6} className="right">
+                            <IconButton color="inherit" aria-label="SideBarMenu">
+                                <MenuIcon />
+                            </IconButton>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={6} className="right">
-                        <IconButton color="inherit" aria-label="SideBarMenu">
-                            <MenuIcon />
-                        </IconButton>
+                </Hidden>
+                <Hidden mdDown>
+                    <Grid container>
+                        <Grid item md={2} className="left">
+                            {getLogo()}
+                        </Grid>
+                        <Grid item md={8} className="list">
+                            {
+                                menu.map((item, i) => (
+                                    <Button aria-haspopup="true" >
+                                        {item}
+                                    </Button>
+                                ))
+                            }
+                        </Grid>
+                        <Grid item md={2} className="right">
+                            <CartWidget/>
+                            <IconButton color="inherit" aria-label="SideBarMenu">
+                                <AccountCircleIcon />
+                            </IconButton>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Hidden>
-            <Hidden mdDown>
-                <Grid container>
-                    <Grid item md={2} className="left">
-                        {getLogo()}
-                    </Grid>
-                    <Grid item md={8} >
-                        {
-                            menu.map((item, i) => (
-                                <Button className="menuButton" aria-haspopup="true" >
-                                    {item}
-                                </Button>
-                            ))
-                        }
-                    </Grid>
-                    <Grid item md={2} className="right">
-                        <IconButton color="inherit" aria-label="SideBarMenu">
-                            <AccountCircleIcon />
-                        </IconButton>
-                    </Grid>
-                </Grid>
-            </Hidden>
-        </Toolbar>
-    </AppBar>
-
+                </Hidden>
+            </Toolbar>
+        </AppBar>
 }
 NavBar.propTypes = {
     styles: PropTypes.object.isRequired,
