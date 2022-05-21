@@ -4,10 +4,7 @@
 .right{
     text-align: right;
 }
-.menuButton {
-    text-transform: 'none';
-    margin: 0;
-    text-decoration: 'none';
-    font-size: '12px';
-    font-weight: "bold";
+.list{
+    text-align: center;
+    vertical-align: bottom;
 }
