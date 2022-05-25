@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
@@ -66,7 +65,5 @@ const NavBar = () => {
             </Toolbar>
         </AppBar>
 }
-NavBar.propTypes = {
-    styles: PropTypes.object.isRequired,
-};
+
 export default NavBar;
