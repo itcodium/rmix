@@ -6,9 +6,7 @@ import NavBar from './components/NavBar/NavBar'
 import ListContainer from './components/ListContainer/ListContainer'
 import { theme } from './App.style'
 
-
 function App() {
-
   return (
     <ThemeProvider theme={theme}>
       <Container disableGutters={true} maxWidth="lg">
