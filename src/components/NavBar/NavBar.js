@@ -48,7 +48,7 @@ const NavBar = () => {
                         <Grid item md={8} className="list">
                             {
                                 menu.map((item, i) => (
-                                    <Button aria-haspopup="true" >
+                                    <Button key = {i} aria-haspopup="true" >
                                         {item}
                                     </Button>
                                 ))
