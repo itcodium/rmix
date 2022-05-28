@@ -7,20 +7,17 @@ const counter = createSlice({
   },
   reducers: {
     increment(state, action) {
-      console.log(state, action)
       state.value += 1
     },
     decrement(state, action) {
       if(state.value>0){
         state.value -= 1
       }
-        console.log(state, action)
     },
     incrementByAmount: (state, action) => {
       state.value += action.payload
     },
     initCounter: (state, action) => {
-      console.log("action", action)
       state.value = action.payload
     },
   }

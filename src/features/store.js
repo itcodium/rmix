@@ -1,41 +1,17 @@
-import { configureStore } from '@reduxjs/toolkit'
-import counterReducer from './counter/counter'
+import { configureStore } from '@reduxjs/toolkit';
+import counterReducer from './counter/counter';
+import productsReducer from './products/products';
+import createSagaMiddleware from 'redux-saga';
+import saga from '../sagas/index';
 
+const sagaMiddleware = createSagaMiddleware();
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
     counter: counterReducer,
-  }
+    products: productsReducer,
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
 })
-
-
-
-/*
-import { createStore, compose, applyMiddleware } from 'redux';
-import saga from '../../sagas/index';
-import reducers from '../reducers';
-
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-const persistConfig = {
-    key: 'root',
-    storage,
-}
-const rootReducer = (state, action) => {
-    if (action.type === 'LOG_OUT') {
-        state = undefined
-    }
-    return reducers(state, action)
-}
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const sagaMiddleware = createSagaMiddleware();
-const middlewareEnhancer = composeEnhancer(applyMiddleware(sagaMiddleware));
-const store = createStore(persistedReducer, middlewareEnhancer);  
-const persistor = persistStore(store);
-
 sagaMiddleware.run(saga);
-export { store, persistor }
-*/
+export { store }
