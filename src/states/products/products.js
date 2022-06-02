@@ -4,7 +4,7 @@ import STATUS from '../status'
 const products = createSlice({
     name: 'products',
     initialState: {
-        data: [],
+        data: {},
         status: STATUS.IDLE,
         error: null
     },
@@ -17,6 +17,11 @@ const products = createSlice({
             });
         },
         loading(state, action) {
+            return Object.assign({}, state, {
+                status: STATUS.LOADING
+            });
+        },
+        fetch(state, action) {
             return Object.assign({}, state, {
                 status: STATUS.LOADING
             });
@@ -37,7 +42,7 @@ const products = createSlice({
     }
 })
 
-export const { init, loading, success, error } = products.actions;
+export const { init, loading, success, fetch, fetchById, fetchByIdSuccess, error } = products.actions;
 
 export const productState = (state) => state.products
 export default products.reducer

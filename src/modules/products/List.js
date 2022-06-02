@@ -21,8 +21,8 @@ const ProductList = ({ products }) => (
 ProductList.propTypes = {
     products: PropTypes.arrayOf(
         PropTypes.shape({
-            id: PropTypes.string.isRequired,
-            price: PropTypes.string.price,
+            id: PropTypes.number.isRequired,
+            price: PropTypes.number.isRequired,
             title: PropTypes.string.isRequired,
             imageUrl: PropTypes.string.isRequired
         }).isRequired

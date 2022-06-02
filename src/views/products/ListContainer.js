@@ -3,19 +3,20 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import ProductList from '../../modules/products/List'
-import Counter from '../Counter/Counter'
+import Counter from '../../components/Counter/Counter'
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import STATUS from '../../features/status'
-import { PRODUCTS } from '../../features/actionTypes'
+import STATUS from '../../states/status'
+// import { PRODUCTS } from '../../states/actionTypes'
+import { fetch } from '../../states/products/products'
 
-const ListContainer = ({ greeting }) => {
+const ProductsListContainer = ({ greeting }) => {
     const dispatch = useDispatch();
     const status = useSelector(state => state.products.status);
     const error = useSelector(state => state.products.error);
     const products = useSelector(state => state.products.data);
     useEffect(() => {
-        dispatch({ type: PRODUCTS.FETCH });
+        dispatch({ type: fetch.type });
     }, [])
     return (
         <div>
@@ -39,4 +40,4 @@ const ListContainer = ({ greeting }) => {
     )
 }
 
-export default ListContainer;
+export default ProductsListContainer;

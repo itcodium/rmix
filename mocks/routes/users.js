@@ -2,8 +2,8 @@
 // For a detailed explanation regarding each routes property, visit:
 // https://mocks-server.org/docs/get-started-routes
 
-// users data
-const PRODUCTS = [
+// products data
+const products = [
   {
     id: 1,
     title: "John",
@@ -40,7 +40,7 @@ module.exports = [
         id: "success", // id of the variant
         response: {
           status: 200, // status to send
-          body: PRODUCTS, // body to send
+          body: products, // body to send
         },
       },
       {
@@ -56,7 +56,7 @@ module.exports = [
     ],
   },
   {
-    id: "get-products", // id of the route
+    id: "get-product", // id of the route
     url: "/api/products/:id", // url in express format
     method: "GET", // HTTP method
     variants: [
@@ -64,21 +64,21 @@ module.exports = [
         id: "success", // id of the variant
         response: {
           status: 200, // status to send
-          body: PRODUCTS[0], // body to send
+          body: products[0], // body to send
         },
       },
       {
         id: "real", // id of the variant
         response: (req, res) => {
-          const productId = req.params.id;
-          const product = PRODUCTS.find((productData) => productData.id === Number(productId));
-          if (product) {
+          const userId = req.params.id;
+          const user = products.find((userData) => userData.id === Number(userId));
+          if (user) {
             res.status(200);
-            res.send(product);
+            res.send(user);
           } else {
             res.status(404);
             res.send({
-              message: "Product not found",
+              message: "User not found",
             });
           }
         },
