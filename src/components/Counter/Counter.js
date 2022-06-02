@@ -5,7 +5,7 @@ import {
     increment,
     initCounter,
     selectCount
-} from '../../features/counter/counter'
+} from '../../states/counter/counter'
 import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';

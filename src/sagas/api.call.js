@@ -1,4 +1,5 @@
 export default function apiCall(url, params = {}, body) {
+    const host= 'http://localhost:3100';
     const localUser = localStorage.getItem('user') || null;
     let jsonUser = null;
     let token = null;
@@ -21,7 +22,7 @@ export default function apiCall(url, params = {}, body) {
         body: body ? JSON.stringify(body) : null,
         headers: params.headers
     };
-    return fetch(url, fetchParams)
+    return fetch(host+url, fetchParams)
         .then(response => {
             return response.json();
         }).then(response => {
