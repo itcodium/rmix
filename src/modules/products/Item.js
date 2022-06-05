@@ -32,7 +32,7 @@ const ProductItem = ({ product }) => (
                     }}
                 >
                     <Paper sx={{width:'50%',  margin: '0 auto 0 auto'}}  elevation={0} >
-                        <img alt="" src={product.imageUrl} />
+                        <img width="360" alt="" src={product.imageUrl} />
                     </Paper>
                     <Paper elevation={0} sx={{pl:2, pr:0}}>
                         <Typography variant="p" color="text.secondary">
@@ -51,7 +51,7 @@ const ProductItem = ({ product }) => (
                 <Typography variant="h5" component="a">
                     $ {product.price}
                 </Typography>
-                <Button href={"#/productDetail/" + product.id} color="primary" >
+                <Button href={"/productDetail/" + product.id} color="primary" >
                     Detail
                 </Button>
             </CardActions>

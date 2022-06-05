@@ -31,7 +31,7 @@ module.exports = {
     // Selected mock
     selected: "base",
     // Global delay to apply to routes
-    //delay: 0,
+    delay: 1000,
   },
   server: {
     // Port number for the server to be listening at

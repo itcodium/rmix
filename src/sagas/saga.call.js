@@ -12,6 +12,7 @@ function* SagaCall(saga, URL, method = 'GET', params, AFTER_TYPE, onSuccess) {
             }
         }*/
     } catch (e) {
+        console.log("error", e)
         yield put({ type: saga.saga+'/error', payload: { status: "error", message: e.message } });
     }
 }
