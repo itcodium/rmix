@@ -8,15 +8,16 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import STATUS from '../../states/status'
 import { fetch } from '../../states/products/detail'
-
-const ProductsDetailContainer = ({ greeting }) => {
+import { useParams } from "react-router-dom";
+const ProductsDetailContainer = () => {
     const dispatch = useDispatch();
-    const status = useSelector(state => state.products.status);
-    const error = useSelector(state => state.products.error);
+    const status = useSelector(state => state.productsDetail.status);
+    const error = useSelector(state => state.productsDetail.error);
     const product = useSelector(state => state.productsDetail.data);
-    
+    let { id } = useParams();
     useEffect(() => {
-       dispatch(fetch({id: 4}));
+        console.log("id", id)
+       dispatch(fetch({id: id}));
     }, [])
     return (
         <div>
@@ -26,7 +27,7 @@ const ProductsDetailContainer = ({ greeting }) => {
                     textAlign: 'center',
                     backgroundColor: '#eee',
                 }}
-            >test</Box>
+            >Detail</Box>
             {status === STATUS.SUCCESS ?
                     <ProductDetail product={product} ></ProductDetail>
               : null}

@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
 import ProductItem from './Item';
+import { useParams } from "react-router-dom";
 
-const ProductList = ({ products }) => (
-    <div>
-        <Grid container spacing={2}>
+const ProductList = ({ products }) => {
+        let { id } = useParams();
+        const list = products.filter(item => item.category.toString() == (id  || item.category));
+        return <Grid container spacing={2}>
             {
-                products.map((product, index) => (
+                list.map((product, index) => (
                        <ProductItem
                                 key={index}
                                 product={product}
@@ -16,8 +18,8 @@ const ProductList = ({ products }) => (
                 ))
             }
         </Grid>
-    </div>
-)
+    
+        }
 ProductList.propTypes = {
     products: PropTypes.arrayOf(
         PropTypes.shape({

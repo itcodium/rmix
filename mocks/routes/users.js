@@ -3,30 +3,62 @@
 // https://mocks-server.org/docs/get-started-routes
 
 // products data
-const products = [
+const PRODUCTS = [
   {
     id: 1,
+    category: 1,
     title: "John",
     price: 25.3,
-    imageUrl: "https://live.staticflickr.com/786/40857704961_4149245c56_m.jpg"
+    imageUrl: "https://live.staticflickr.com/4115/4777704064_7c9eacc798_b.jpg"
   },
   {
     id: 2,
-    title: "Doe",
-    price: 33.5,
-    imageUrl: "https://live.staticflickr.com/7888/46485996115_90ef86c2cf_w.jpg"
-  },
-  {
-    id: 3,
+    category:2,
     title: "Joe",
     price: 5.3,
     imageUrl: "https://live.staticflickr.com/4027/4518144704_273b98ef81_w.jpg"
   },
   {
-    id: 4,
+    id: 3,
+    category:2,
     title: "Doen",
     price: 34.5,
     imageUrl: "https://live.staticflickr.com/8471/8076906297_1c3fcd7961_n.jpg"
+  },
+  {
+    id: 4,
+    category:2,
+    title: "Doe",
+    price: 33.5,
+    imageUrl: "https://live.staticflickr.com/7888/46485996115_90ef86c2cf_w.jpg"
+  },
+  {
+    id: 5,
+    category:3,
+    title: "Do en1b",
+    price: 77.5,
+    imageUrl: "https://live.staticflickr.com/3737/12410422355_13ed826e59_b.jpg"
+  },
+  {
+    id: 6,
+    category: 3,
+    title: "Doe n2b",
+    price: 145.5,
+    imageUrl: "https://live.staticflickr.com/3786/8783496185_eede57d206_b.jpg"
+  },
+  {
+    id: 7,
+    category: 1,
+    title: "Doe n3",
+    price: 93.5,
+    imageUrl: "https://live.staticflickr.com/3268/2394450343_b250eb2666_b.jpg"
+  },
+  {
+    id: 8,
+    category:1,
+    title: "Do en4",
+    price: 44.5,
+    imageUrl: "https://live.staticflickr.com/4753/40483032541_02f3f584a6_b.jpg"
   },
 ];
 
@@ -40,7 +72,7 @@ module.exports = [
         id: "success", // id of the variant
         response: {
           status: 200, // status to send
-          body: products, // body to send
+          body: PRODUCTS, // body to send
         },
       },
       {
@@ -64,17 +96,17 @@ module.exports = [
         id: "success", // id of the variant
         response: {
           status: 200, // status to send
-          body: products[0], // body to send
+          body: PRODUCTS[0], // body to send
         },
       },
       {
         id: "real", // id of the variant
         response: (req, res) => {
           const userId = req.params.id;
-          const user = products.find((userData) => userData.id === Number(userId));
-          if (user) {
+          const product = PRODUCTS.find((userData) => userData.id === Number(userId));
+          if (product) {
             res.status(200);
-            res.send(user);
+            res.send(product);
           } else {
             res.status(404);
             res.send({
