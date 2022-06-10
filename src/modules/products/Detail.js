@@ -9,12 +9,12 @@ import Button from '@mui/material/Button';
 import Counter from '../../components/Counter/Counter'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { add } from '../../states/products/cart'
+import { add, isInCart } from '../../states/products/cart'
 
 const ProductDetail = ({ product }) => {
     const dispatch = useDispatch()
     const cart = useSelector(state => state.cart.data);
-    const exist = cart.find(item => item.id === product.id)
+    const exist = isInCart(cart, product.id);
     const addTocart = (units) => {
         dispatch(add({ id: product.id, units }));
     }
