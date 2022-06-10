@@ -13,14 +13,24 @@ const cart = createSlice({
     },
     remove(state, action) {
       return Object.assign({}, state, {
-        data: state.data.filter(m => m.id !== action.id)
+        data: state.data.filter(m => m.id !== action.payload.id)
       });
     },
+    clear(state) {
+      return Object.assign({}, state, {
+        data: []
+      });
+    },
+    
   }
 })
 
+export const isInCart = (cart, id) => {
+  return  cart.find(item => item.id === id);
+}
 export const { add, remove } = cart.actions
 export default cart.reducer
+
 
 const addTocart= (state, action) => {
   const ix = state.data.findIndex(item => {
