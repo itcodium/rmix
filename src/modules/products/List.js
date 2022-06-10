@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 
 const ProductList = ({ products }) => {
         let { id } = useParams();
-        const list = products.filter(item => item.category.toString() == (id  || item.category));
+        const list = products.filter(item => item.category === (parseInt( id)   || item.category));
         return <Grid container spacing={2}>
             {
                 list.map((product, index) => (
