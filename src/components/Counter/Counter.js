@@ -26,33 +26,25 @@ const Counter = ({ stock, initial, onAdd }) => {
         <Stack spacing={5}>
             <Box 
                 sx={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    m: 2
+                    textAlign: 'center',
                 }}
             >
-                <Paper elevation={0} >
+                <Paper elevation={0}>
                     <IconButton   onClick={() => dispatch(decrement())} component="span" disabled={!count}>
                         <Remove />
                     </IconButton>
-                </Paper>
-                <Paper elevation={0} >
-                    <Typography variant="h5" sx={{ p: 1, pl: 3, pr: 3 }} >{count}</Typography>
-                </Paper>
-                <Paper elevation={0} >
+                    <Typography variant="span" sx={{ p: 0, pl: 3, pr: 3 }} >{count}</Typography>
                     <IconButton  onClick={() => dispatch(increment())}  component="span" disabled={stock === count} >
                         <Add />
                     </IconButton>
                 </Paper>
-                <Paper elevation={0}  >
-                    <Button variant="contained" onClick={() => { onAdd(count) }} sx={{ ml: 5, mt: 0 }}>Add to cart</Button>
+                <Paper elevation={0} sx={{ textAlign: 'center',}} >
+                    <Button variant="contained" onClick={() => { onAdd(count) }}>Add to cart</Button>
                 </Paper>
             </Box>
-
         </Stack>
-
     )
 }
 

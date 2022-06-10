@@ -10,13 +10,11 @@ import AppBar from '@mui/material/AppBar';
 import mainLogo from '../../assets/logo.png';
 import Button from '@mui/material/Button';
 import './NavBar.css';
-import CartWidget from '../CartWidget/CartWidget'
+import CartWidget from '../../modules/products/CartWidget'
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
-
     const categories = [{ id: 1, name: 'Bakery' }, { id: 2, name: 'cakes' }, { id: 3, name: ' Desayunos' }];
-
     const getLogo = () => {
         return <Typography component="h2"
             variant="h5"

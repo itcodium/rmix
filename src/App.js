@@ -12,6 +12,7 @@ import NavBar from './components/NavBar/NavBar'
 import { theme } from './App.style'
 import ProductsListContainer from './views/products/ListContainer'
 import ProductsDetailContainer from './views/products/DetailContainer'
+import CartList from './views/products/CartList'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="" element={<ProductsListContainer greeting={"Hello!"}></ProductsListContainer>}></Route>
             <Route path="/:id" element={<ProductsListContainer greeting={"Hello!"}></ProductsListContainer>}></Route>
             <Route path="/productDetail/:id" element={<ProductsDetailContainer></ProductsDetailContainer>}></Route>
+            <Route path="/cart" element={<CartList></CartList>}></Route>
             </Routes>
           </Container>
         </Container>
