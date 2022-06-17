@@ -1,4 +1,4 @@
-import React  from 'react'
+import React from 'react'
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -16,23 +16,16 @@ const ProductsDetailContainer = () => {
     const product = useSelector(state => state.productsDetail.data);
     let { id } = useParams();
     useEffect(() => {
-       dispatch(fetch({id: id}));
+        dispatch(fetch({ id: id }));
     }, [])
     return (
-        <div>
-            <Box
-                sx={{
-                    p: 3,
-                    textAlign: 'center',
-                    backgroundColor: '#eee',
-                }}
-            >Detail</Box>
+        <>
             {status === STATUS.SUCCESS ?
-                    <ProductDetail product={product} ></ProductDetail>
-              : null}
-            {status === STATUS.LOADING ? <Box sx={{  p: 3, display: 'block', textAlign: 'center', }}><CircularProgress /> </Box> : null}
+                <ProductDetail product={product} ></ProductDetail>
+                : null}
+            {status === STATUS.LOADING ? <Box sx={{ p: 3, display: 'block', textAlign: 'center', }}><CircularProgress /> </Box> : null}
             {status === STATUS.ERROR ? <Typography color="error" variant="overline" display="block" gutterBottom>{error.message}</Typography> : null}
-        </div>
+        </>
     )
 }
 export default ProductsDetailContainer;

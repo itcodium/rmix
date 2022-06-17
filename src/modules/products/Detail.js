@@ -10,13 +10,15 @@ import Counter from '../../components/Counter/Counter'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { add, isInCart } from '../../states/products/cart'
+import { selectCount } from '../../states/counter/counter'
+
 
 const ProductDetail = ({ product }) => {
     const dispatch = useDispatch()
     const cart = useSelector(state => state.cart.data);
     const exist = isInCart(cart, product.id);
     const addTocart = (units) => {
-        dispatch(add({ id: product.id, units }));
+        dispatch(add({ ...product, units }));
     }
     return <Grid item xs={12} sm={12} md={6} lg={6}>
         <Card sx={{ p: 2 }}>

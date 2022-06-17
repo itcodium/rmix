@@ -5,6 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import { Link } from "react-router-dom";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useSelector } from 'react-redux'
+import { countCartUnits } from '../../states/products/cart'
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -17,10 +18,11 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const CartWidget = () => {
     const cart = useSelector(state => state.cart.data);
+    let total = countCartUnits(cart)
     return (
         <Link component="button" to={"/cart"}>
             <IconButton aria-label="cart">
-                <StyledBadge badgeContent={cart.length} color="secondary">
+                <StyledBadge badgeContent={total} color="secondary">
                     <ShoppingCartIcon />
                 </StyledBadge>
             </IconButton>

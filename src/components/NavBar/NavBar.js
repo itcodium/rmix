@@ -8,13 +8,13 @@ import Grid from '@mui/material/Grid';
 import Hidden from '@mui/material/Hidden';
 import AppBar from '@mui/material/AppBar';
 import mainLogo from '../../assets/logo.png';
+import categories from "../../data/categories.json";
 import Button from '@mui/material/Button';
 import './NavBar.css';
 import CartWidget from '../../modules/products/CartWidget'
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
-    const categories = [{ id: 1, name: 'Bakery' }, { id: 2, name: 'cakes' }, { id: 3, name: ' Desayunos' }];
     const getLogo = () => {
         return <Typography component="h2"
             variant="h5"
@@ -23,7 +23,7 @@ const NavBar = () => {
             noWrap
         >
             <Link to={"/"}>
-            <img width='140' alt="" flex='1' align="center" src={mainLogo}></img>
+                <img width='140' alt="" flex='1' align="center" src={mainLogo}></img>
             </Link>
 
         </Typography>
@@ -51,7 +51,7 @@ const NavBar = () => {
                     <Grid item md={8} className="list">
                         {
                             categories.map((item, i) => (
-                                <Button variant="default">
+                                <Button key={i} variant="default">
                                     <Link component="button" key={i} to={"/" + item.id}>     {item.name} </Link>
                                 </Button>
                             ))

@@ -24,7 +24,7 @@ const Counter = ({ stock, initial, onAdd }) => {
 
     return (
         <Stack spacing={5}>
-            <Box 
+            <Box
                 sx={{
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -32,16 +32,16 @@ const Counter = ({ stock, initial, onAdd }) => {
                 }}
             >
                 <Paper elevation={0}>
-                    <IconButton   onClick={() => dispatch(decrement())} component="span" disabled={!count}>
+                    <IconButton onClick={() => dispatch(decrement())} component="span" disabled={!count}>
                         <Remove />
                     </IconButton>
                     <Typography variant="span" sx={{ p: 0, pl: 3, pr: 3 }} >{count}</Typography>
-                    <IconButton  onClick={() => dispatch(increment())}  component="span" disabled={stock === count} >
+                    <IconButton onClick={() => dispatch(increment())} component="span" disabled={stock === count} >
                         <Add />
                     </IconButton>
                 </Paper>
-                <Paper elevation={0} sx={{ textAlign: 'center',}} >
-                    <Button variant="contained" onClick={() => { onAdd(count) }}>Add to cart</Button>
+                <Paper elevation={0} sx={{ textAlign: 'center', }} >
+                    <Button variant="contained" disabled={!count} onClick={() => { onAdd(count) }}>Add to cart</Button>
                 </Paper>
             </Box>
         </Stack>

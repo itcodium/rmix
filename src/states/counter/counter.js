@@ -10,7 +10,7 @@ const counter = createSlice({
       state.value += 1
     },
     decrement(state, action) {
-      if(state.value>0){
+      if (state.value > 0) {
         state.value -= 1
       }
     },
@@ -23,9 +23,9 @@ const counter = createSlice({
   }
 })
 
-export const { increment, decrement, 
-  initCounter, 
-  incrementByAmount} = counter.actions
+export const { increment, decrement,
+  initCounter,
+  incrementByAmount } = counter.actions
 
 export const incrementAsync = (amount) => (dispatch) => {
   setTimeout(() => {
