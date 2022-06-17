@@ -7,7 +7,6 @@ const saga = 'products';
 
 function* fetchProductById(params) {
     const URL = API_URL + "/"+ params.payload.id ;
-    console.log("URL ", URL )
     yield SagaCall({ saga, success: success.type, error }, URL) ;
 }
 
