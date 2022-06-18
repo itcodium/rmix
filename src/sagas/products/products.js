@@ -1,12 +1,12 @@
 import { takeLatest } from 'redux-saga/effects'
-import SagaCall from '../saga.call';
+import ProductsCall from './products.call';
 import { fetch, success, error } from '../../states/products/products'
 
-const API_URL = `/api/products`;
+const collection = `products`;
 const saga = 'products';
 
-function* fetchProduct() {
-    yield SagaCall({ saga, success: success.type, error }, API_URL) ;
+function* fetchProduct(params) {
+    yield ProductsCall({ saga, success: success.type, error }, collection, { categoryId: params.payload.categoryId}) ;
 }
 
 export function* products() {

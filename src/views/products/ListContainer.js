@@ -7,14 +7,16 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import STATUS from '../../states/status'
 import { fetch } from '../../states/products/products'
+import { useParams } from "react-router-dom";
 
 const ProductsListContainer = () => {
     const dispatch = useDispatch();
     const status = useSelector(state => state.products.status);
     const error = useSelector(state => state.products.error);
     const products = useSelector(state => state.products.data);
+    let { id } = useParams();
     useEffect(() => {
-        dispatch({ type: fetch.type });
+        dispatch(fetch({ categoryId: id }));
     }, [])
     return (
         <>

@@ -9,11 +9,13 @@ import {
 import { ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import NavBar from './components/NavBar/NavBar'
-import { theme } from './App.style'
+import { theme } from './App.style';
+import './services/firebase'
 import ProductsListContainer from './views/products/ListContainer'
 import ProductsDetailContainer from './views/products/DetailContainer'
 import CartList from './views/products/CartList'
-
+// import { setUp } from './services/setUpStore'
+// setUp(); 
 function App() {
   return (
     <BrowserRouter>
@@ -35,17 +37,4 @@ function App() {
 }
 
 export default App;
-/*
-<Router>
-            <Routes>
-              <Route key="10" path="/" >
-                <ProductsListContainer greeting={"Hello!"}></ProductsListContainer>
-              </Route>
-              <Route key="20" path="" >
-                <ProductsListContainer greeting={"Hello!"}></ProductsListContainer>
-              </Route>
-              <Route key="30" path="/test" >
-              </Route>
-            </Routes>
-          </Router>
-*/
+ 
