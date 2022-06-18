@@ -44,7 +44,7 @@ const ProductDetail = ({ product }) => {
                         </Typography>
                         <Paper elevation={0} sx={{ display: 'flex', justifyContent: 'space-around', mt: 2 }}>
                             {!exist ?
-                                <Counter sx={{ align: 'right' }} stock={product.stock} initial={0} onAdd={addTocart}></Counter>
+                                <Counter sx={{ align: 'right' }} stock={product.stock} initial={product.stock ? 1: 0} onAdd={addTocart}></Counter>
                                 :
                                 <Button variant="contained" href="/cart">
                                     Terminar la compra
