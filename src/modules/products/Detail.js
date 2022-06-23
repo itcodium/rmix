@@ -4,19 +4,18 @@ import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
+import Alert from '@mui/material/Alert';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 import Counter from '../../components/Counter/Counter'
-
 import { useDispatch, useSelector } from 'react-redux'
 import { add, isInCart } from '../../states/products/cart'
-import { selectCount } from '../../states/counter/counter'
-
 
 const ProductDetail = ({ product }) => {
     const dispatch = useDispatch()
     const cart = useSelector(state => state.cart.data);
-    const exist = isInCart(cart, product.id);
+    let cartProduct = isInCart(cart, product.id);
     const addTocart = (units) => {
         dispatch(add({ ...product, units }));
     }
@@ -42,15 +41,22 @@ const ProductDetail = ({ product }) => {
                             together with your guests. Add 1 cup of frozen peas along with the mussels,
                             if you like.
                         </Typography>
-                        <Paper elevation={0} sx={{ display: 'flex', justifyContent: 'space-around', mt: 2 }}>
-                            {!exist ?
-                                <Counter sx={{ align: 'right' }} stock={product.stock} initial={product.stock ? 1: 0} onAdd={addTocart}></Counter>
-                                :
-                                <Button variant="contained" href="/cart">
-                                    Terminar la compra
-                                </Button>
-                            }
-                        </Paper>
+                        <Box sx={{
+                            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                            mt: 4, mr: 3, mb: 3,
+                            textAlign: 'right',
+                        }}>
+                            <Paper elevation={0}>
+                                {<Counter sx={{ align: 'right' }} stock={product.stock} initial={cartProduct && cartProduct.units ? cartProduct.units : 0} onAdd={addTocart}></Counter>
+                                }
+                                {
+                                    !product.stock && <Alert severity="warning">Sin stock</Alert>
+                                }
+                            </Paper>
+                            { cartProduct ? <Button variant="contained" href="/cart">
+                                Finalizar Compra
+                            </Button>: <p></p>}
+                        </Box>
                     </Grid>
                 </Grid>
             </CardContent>

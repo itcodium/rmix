@@ -18,3 +18,13 @@ const deleteProducts = async () => {
         await deleteDoc(doc(db, "products", item.id));
     });
 }
+
+const getCollectionReference = async (collectionName) => {
+    const collectionRef = query(collection(db, collectionName));
+    const data = [];
+    const querySnapshot = await getDocs(collectionRef);
+    querySnapshot.forEach(async( doc) => {
+        const customer = await getDoc(doc.data().customer);
+        console.log("customer", docSnap2.data())
+    });
+}

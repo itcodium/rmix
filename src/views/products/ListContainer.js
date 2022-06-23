@@ -14,10 +14,11 @@ const ProductsListContainer = () => {
     const status = useSelector(state => state.products.status);
     const error = useSelector(state => state.products.error);
     const products = useSelector(state => state.products.data);
+    const user = useSelector(state => state.user.data);
     let { id } = useParams();
     useEffect(() => {
         dispatch(fetch({ categoryId: id }));
-    }, [])
+    }, [id])
     return (
         <>
             {status === STATUS.SUCCESS ?

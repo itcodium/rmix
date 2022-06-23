@@ -41,7 +41,7 @@ const Counter = ({ stock, initial, onAdd }) => {
                     </IconButton>
                 </Paper>
                 <Paper elevation={0} sx={{ textAlign: 'center', }} >
-                    <Button variant="contained" disabled={!count} onClick={() => { onAdd(count) }}>Add to cart</Button>
+                    <Button variant="outlined"  disabled={!count} onClick={() => { onAdd(count) }}>Add to cart</Button>
                 </Paper>
             </Box>
         </Stack>

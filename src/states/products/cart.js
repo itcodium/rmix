@@ -14,7 +14,7 @@ const cart = createSlice({
         return item.id !== action.payload.id
       })
     },
-    clear(state) {
+    clearCart(state) {
       state.data = [];
     },
 
@@ -39,7 +39,7 @@ export const countCartUnits = (cart) => {
   return total;
 }
 
-export const { add, removeItem, clear } = cart.actions
+export const { add, removeItem, clearCart } = cart.actions
 export default cart.reducer
 
 
@@ -56,6 +56,7 @@ const addTocart = (state, action) => {
       action.payload,
       ...state.data.slice(ix + 1, state.data.length)
     ]
+    
   }
   return data;
 }
