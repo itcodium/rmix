@@ -10,6 +10,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
+import Alert from '@mui/material/Alert';
+
 const ProductItem = ({ product }) => (
     <Grid item xs={12} sm={12} md={6} lg={6}>
         <Card sx={{ p: 2 }}>
@@ -40,7 +42,9 @@ const ProductItem = ({ product }) => (
                             together with your guests. Add 1 cup of frozen peas along with the mussels,
                             if you like.
                         </Typography>
+                        {product.stock===0 && <Alert sx={{mt:4}} severity="warning">Sin stock</Alert> }
                     </Paper>
+                    
 
                 </Box>
             </CardContent>
@@ -48,12 +52,8 @@ const ProductItem = ({ product }) => (
                 <IconButton aria-label="add to favorites">
                     <FavoriteIcon />
                 </IconButton>
-                <Typography variant="h5" component="a">
-                    $ {product.price}
-                </Typography>
-                <Button href={"/productDetail/" + product.id} color="primary" >
-                    Detail
-                </Button>
+                <Typography variant="h5" component="a">$ {product.price} </Typography>
+                <Button href={"/productDetail/" + product.id} color="primary" >Detail</Button>
             </CardActions>
         </Card>
     </Grid>
