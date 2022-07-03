@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
+import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Chip from '@mui/material/Chip';
+import Divider from '@mui/material/Divider';
 import { useSelector, useDispatch } from 'react-redux';
 import categories from "../../data/categories.json";
 import { getTotal } from '../../states/products/cart';
-import { fetch, post } from '../../states/products/orders'
+import { fetch, post } from '../../states/products/orders';
+import { Link } from "react-router-dom";
 import CartItem from './CartItem';
 import STATUS from '../../states/status'
 
@@ -33,7 +35,7 @@ const Cart = ({ items, user }) => {
     const sendOrder = () => {
         dispatch(post({ customer: user, total, items }));
     }
-    
+
     return <>
         {
             list.map((category, index) => (
@@ -41,46 +43,57 @@ const Cart = ({ items, user }) => {
                     <Grid key={index} item>
                         {
                             category.products.map((product, ixp) => (
-                                <CartItem key={ixp} product={product}></CartItem>
+                                <CartItem key={ixp} category={category} product={product}></CartItem>
                             ))
                         }
-                        <Box key={index} sx={{
-                            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                            mt: 0, mr: 3, mb: 3,
-                            textAlign: 'right',
-                        }}>
-                            <Chip label={category.name} size="medium" />
-                            <Typography component="h3" variant="h6">${category.subTotal} </Typography>
-                        </Box>
+                        <Divider sx={{ mb: 1 }} />
                     </Grid>)
             ))
         }
+        <Container maxWidth="xs" sx={{ m: '0 auto', mb: 1 }}>
+            <Grid container>{
+                list.filter(item => item.subTotal > 0).map((item, ixp) => (
+                    <React.Fragment key={item.name}>
+                        <Grid item xs={6}>
+                            <Typography sx={{ m: 0, p: 0 }} variant="overline" gutterBottom>{item.name}</Typography>
+                        </Grid>
+                        <Grid item xs={6} sx={{ textAlign: 'right' }}>
+                            <Typography variant="overline" gutterBottom>$ {item.subTotal}</Typography>
+                        </Grid>
+                    </React.Fragment>
+                ))}
+                {total > 0 && <React.Fragment >
+                    <Grid item xs={6}>
+                        <Typography variant="button" gutterBottom>Total</Typography>
+                    </Grid>
+                    <Grid item xs={6} sx={{ textAlign: 'right' }}>
+                        <Typography variant="button" gutterBottom>$ {total}</Typography>
+                    </Grid>
+                </React.Fragment>
+                }
+            </Grid>
+        </Container>
         {
-          items.length > 0 && <><Typography sx={{ p: 1, mr: 1, mb: 1, pr: 2, textAlign: 'right', backgroundColor: '#eee', }} component="h2" variant="h5"> Total: $ {total}
-            </Typography>
-                <Box sx={{ mr: 2, textAlign: 'right' }} >
-                    <Button disabled={status === STATUS.LOADING} variant="contained" onClick={() => { sendOrder() }} >
-                        Enviar Orden
-                    </Button>
-                </Box></>
+            items.length > 0 && <Box sx={{ textAlign: 'center' }} >
+                <Divider sx={{ mb: 1 }} />
+                <Button variant="contained" disabled={status === STATUS.LOADING} onClick={() => { sendOrder() }} >
+                    Enviar Orden
+                </Button>
+            </Box>
         }
 
-        { items.length === 0 && <Box
-            sx={{
-                p: 3,
-                mt: 2,
-                textAlign: 'center',
-                backgroundColor: '#eee',
-            }}
-        >
+        {items.length === 0 && <Box sx={{ textAlign: 'center' }}>
             <Typography sx={{ mb: 3 }} component="h2" variant="h5"> Cart is empty </Typography>
-            <Button variant="outlined" href="/">Buscar</Button>
+            <Button variant="outlined" >
+                <Link to='/' >
+                    <Typography sx={{ textDecoration: 'underline white', color:"#1769aa" }} >Buscar</Typography>
+                </Link>
+            </Button>
         </Box>}
 
         {status === STATUS.SUCCESS && null}
-        {status === STATUS.LOADING && <Box sx={{ p: 3, display: 'block', textAlign: 'center', }}><CircularProgress /> </Box> }
+        {status === STATUS.LOADING && <Box sx={{ p: 3, display: 'block', textAlign: 'center', }}><CircularProgress /> </Box>}
         {status === STATUS.ERROR && <Typography color="error" variant="overline" display="block" gutterBottom>{error.message}</Typography>}
     </>
 }
 export default Cart;
-

@@ -16,11 +16,12 @@ const ProductsDetailContainer = () => {
     const product = useSelector(state => state.productsDetail.data);
     let { id } = useParams();
     useEffect(() => {
+        console.log("id", id)
         dispatch(fetch({ id: id }));
     }, [])
     return (
         <>
-            {status === STATUS.SUCCESS ?
+          {status === STATUS.SUCCESS ?
                 <ProductDetail product={product} ></ProductDetail>
                 : null}
             {status === STATUS.LOADING ? <Box sx={{ p: 3, display: 'block', textAlign: 'center', }}><CircularProgress /> </Box> : null}
@@ -29,3 +30,7 @@ const ProductsDetailContainer = () => {
     )
 }
 export default ProductsDetailContainer;
+
+/**
+   
+ */

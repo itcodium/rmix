@@ -22,10 +22,10 @@ function App() {
       <ThemeProvider theme={theme}>
         <Container disableGutters={true} maxWidth="lg">
           <NavBar></NavBar>
-          <Container disableGutters={true} fixed sx={{ mt: 4, mb: 4, pl: { xs:1}, mr: {xs:1 } }}>
+          <Container sx={{ pl: { xs:1}, pr: { xs:1 } }}  disableGutters={true} fixed>
             <Routes>
-            <Route path="" element={<ProductsListContainer greeting={"Hello!"}></ProductsListContainer>}></Route>
-            <Route path="/:id" element={<ProductsListContainer greeting={"Hello!"}></ProductsListContainer>}></Route>
+            <Route path="" element={<ProductsListContainer></ProductsListContainer>}></Route>
+            <Route path="/:id" element={<ProductsListContainer></ProductsListContainer>}></Route>
             <Route path="/productDetail/:id" element={<ProductsDetailContainer></ProductsDetailContainer>}></Route>
             <Route path="/cart" element={<CartList></CartList>}></Route>
             </Routes>
@@ -37,4 +37,5 @@ function App() {
 }
 
 export default App;
- 
+ // https://docs.google.com/document/d/1pj-gatjxqk7pv8uRv4gN3HBFVuQj3FhGQxwNy1gA2Uk/edit 
+// sx={{ mt: 4, mb: 4, pl: { xs:1}, mr: {xs:1 } }}

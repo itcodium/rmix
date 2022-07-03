@@ -1,71 +1,82 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import Grid from '@mui/material/Grid';
 import Hidden from '@mui/material/Hidden';
+import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
+import Drawer from '@mui/material/Drawer';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import MenuList from '@mui/material/MenuList';
+import MenuItem from '@mui/material/MenuItem';
 import mainLogo from '../../assets/logo.png';
 import categories from "../../data/categories.json";
-import Button from '@mui/material/Button';
-import './NavBar.css';
 import CartWidget from '../../modules/products/CartWidget'
-import { Link } from "react-router-dom";
 
 const NavBar = () => {
-    const getLogo = () => {
-        return <Typography component="h2"
-            variant="h5"
-            color="inherit"
-            align={'left'}
-            noWrap
-        >
+    const [open, setOpen] = React.useState(false);
+    const toggleDrawer = (open) => () => {
+        setOpen(open)
+    };
+
+    const getCategories = (display) => {
+        return <MenuList sx={{display:display}}> {
+            categories.map((item, i) => (
+                <MenuItem   key={i} >
+                    <Link to={"/" + item.id} className='link' >
+                        <Typography variant="button">{item.name}</Typography>
+                    </Link>
+                </MenuItem>
+            ))
+        }</MenuList>
+    }
+    return <AppBar position="static" sx={{ mb: 2 }} color="transparent">
+        <Hidden mdUp>
+            <Drawer open={open} onClose={toggleDrawer(false)}>
+                <Box
+                    sx={{ width: 250}}
+                    role="presentation"
+                    onClick={toggleDrawer(false)}
+                    onKeyDown={toggleDrawer(false)}
+                >
+                    <Box sx={{ textAlign: 'center',p: 1 }}>
+                        <Link to={"/"} >
+                            <img width='140' alt="" flex='1' align="center" src={mainLogo}></img>
+                        </Link>
+                    </Box>
+                    <Divider />
+                    {getCategories('block')}
+                </Box>
+
+            </Drawer>
+        </Hidden>
+
+        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <Link to={"/"}>
                 <img width='140' alt="" flex='1' align="center" src={mainLogo}></img>
             </Link>
-
-        </Typography>
-    }
-
-    return <AppBar position="static" color="transparent" className='container' >
-        <Toolbar>
-            <Hidden mdUp>
-                <Grid container>
-                    <Grid item xs={6}>
-                        {getLogo()}
-                    </Grid>
-                    <Grid item xs={6} className="right">
-                        <IconButton color="inherit" aria-label="SideBarMenu">
-                            <MenuIcon />
-                        </IconButton>
-                    </Grid>
-                </Grid>
-            </Hidden>
             <Hidden mdDown>
-                <Grid container>
-                    <Grid item md={2} className="left">
-                        {getLogo()}
-                    </Grid>
-                    <Grid item md={8} className="list">
-                        {
-                            categories.map((item, i) => (
-                                <Button key={i} variant="default">
-                                    <Link component="button" key={i} to={"/" + item.id}>     {item.name} </Link>
-                                </Button>
-                            ))
-                        }
-                    </Grid>
-                    <Grid item md={2} className="right">
-                        <CartWidget />
-                        <IconButton color="inherit" aria-label="SideBarMenu">
-                            <AccountCircleIcon />
-                        </IconButton>
-                    </Grid>
-                </Grid>
+                <Box>
+                    {getCategories('flex')}
+                </Box>
             </Hidden>
+            <Box>
+                <CartWidget />
+                <Hidden mdDown>
+                    <IconButton sx={{ pl: 2 }} color="inherit" aria-label="SideBarMenu">
+                        <AccountCircleIcon />
+                    </IconButton>
+                </Hidden>
+                <Hidden mdUp>
+                    <IconButton onClick={toggleDrawer(true)} sx={{ pl: 2 }} color="inherit" aria-label="SideBarMenu">
+                        <MenuIcon />
+                    </IconButton>
+                </Hidden>
+            </Box>
         </Toolbar>
-    </AppBar>
+    </AppBar >
 }
 export default NavBar;

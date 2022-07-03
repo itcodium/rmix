@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
 import ProductItem from './Item';
-import { useParams } from "react-router-dom";
 
 const ProductList = ({ products }) => {
     return <Grid container spacing={2}>
@@ -28,4 +27,5 @@ ProductList.propTypes = {
         }).isRequired
     ).isRequired,
 };
+
 export default ProductList;
