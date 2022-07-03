@@ -4,57 +4,111 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { removeItem } from '../../states/products/cart';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActionArea from '@mui/material/CardActionArea';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
+import Hidden from '@mui/material/Hidden';
 import Chip from '@mui/material/Chip';
 import { Link } from "react-router-dom";
-import { useDispatch } from 'react-redux'
-
-const CartItem = ({ product }) => {
+import Counter from '../../components/Counter/Counter'
+import { useDispatch, useSelector } from 'react-redux'
+import { add, isInCart } from '../../states/products/cart'
+const CartItem = ({ product, category }) => {
     const dispatch = useDispatch();
-    return <CardActionArea sx={{ pl: 0, pr: 1, pb: 1 }} component="a">
-        <Card sx={{ display: 'flex' }}>
-            <CardMedia
-                component="img"
-                sx={{ width: 100, display: { sm: 'block' } }}
-                image={product.imageUrl}
-                alt={product.imageUrl}
-            />
-            <CardContent sx={{ flex: 1, pl: 1, pt: 0 }}>
-                <Typography component="h3" variant="h5">
-                    <Link to={"/productDetail/" + product.id}>
-                        {product.title}
+    const cart = useSelector(state => state.cart.data);
+    let cartProduct = isInCart(cart, product.id);
+    const addTocart = (units) => {
+        if (units) {
+            dispatch(add({ ...product, units }));
+        } else {
+            if (units === 0) {
+                dispatch(removeItem(product))
+            }
+        }
+    }
+
+    return <Box>
+
+        <Hidden mdDown>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                <img width="100" alt="" src={product.imageUrl} />
+
+                <Box sx={{ pl: 1, alignItems: 'left', display: 'flex', flex: 1, flexDirection: 'column', justifyContent: 'space-between', }}>
+                    <Typography gutterBottom variant="subtitle1" component="div">
+                        <Link sx={{ textDecoration: 'undeline white' }} to={"/productDetail/" + product.id}>
+                            <Typography sx={{ color: '#000' }} gutterBottom variant="subtitle1" component="div">
+                                {product.title}
+                            </Typography>
+                        </Link>
+                        <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+                            {product.description}
+                        </Typography>
+                    </Typography>
+
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'nowrap' }} disableSpacing>
+                    <Box sx={{ width: '100%' }}>
+                        <Chip label={category.name} size="medium" />
+                        </Box>
+                        <Box sx={{ width: '100%' }}>
+                        <Counter
+                        
+                            stock={product.stock}
+                            initial={cartProduct && cartProduct.units ? cartProduct.units : 0}
+                            onAdd={addTocart}></Counter>
+                            </Box>
+                        <Typography component="p" variant="button" sx={{width: '100%', textAlign:'right'}}>
+                            $ {product.price * cartProduct.units}
+                        </Typography>
+
+                    </Box>
+                </Box>
+                <Box sx={{ pl: 4, pr: 4, alignItems: 'center', display: 'flex' }}>
+                    <IconButton aria-label="Delete"
+                        onClick={() => dispatch(removeItem(product))} component="span">
+                        <DeleteIcon />
+                    </IconButton>
+
+                </Box>
+            </Box>
+        </Hidden>
+        <Hidden mdUp>
+
+            <Box>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <Link sx={{ textDecoration: 'undeline white' }} to={"/productDetail/" + product.id}>
+                        <Typography sx={{ color: '#000' }} gutterBottom variant="subtitle1" component="div">
+                            {product.title}
+                        </Typography>
                     </Link>
-                </Typography>
-                {product.stock < product.units && <Chip color="error" size="small" label="Sin stock" variant="outlined" />}
-            </CardContent>
-            <Box
-                sx={{
-                    p: 1,
-                    alignItems: 'center',
-                    display: 'flex',
-                }}
-            >
-                <Typography>
-                    ${product.price} x {product.units} - {product.stock}
-                </Typography>
+                    <Box sx={{ display: 'flex' }}>         <IconButton aria-label="Delete"
+                        onClick={() => dispatch(removeItem(product))} >
+                        <DeleteIcon />
+                    </IconButton>
+                    </Box>
+                </Box>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', pb: 1 }}  >
+                    <Box>
+                        <img width="100" alt="" src={product.imageUrl} />
+                    </Box>
+                    <Box sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        flex: 1, pl: 1
+                    }}>
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} disableSpacing>
+                            <Chip label={category.name} size="medium" />
+
+                            <Typography component="p" variant="button">
+                                $ {product.price * cartProduct.units}
+                            </Typography>
+
+                        </Box>
+                        <Counter
+                            stock={product.stock}
+                            initial={cartProduct && cartProduct.units ? cartProduct.units : 0}
+                            onAdd={addTocart}></Counter>
+                    </Box>
+                </Box>
             </Box>
-            <Box
-                sx={{
-                    p: 1,
-                    alignItems: 'center',
-                    display: 'flex',
-                }}
-            >
-                <IconButton aria-label="Delete"
-                    onClick={() => dispatch(removeItem(product))} component="span">
-                    <DeleteIcon />
-                </IconButton>
-            </Box>
-        </Card>
-    </CardActionArea>
+        </Hidden>
+    </Box>
 }
 export default CartItem;
-

@@ -1,66 +1,74 @@
 export const PRODUCTS = [
     {
         category: 1,
-        title: "John",
-        price: 25.3,
-        stock: 0,
-        imageUrl: "https://live.staticflickr.com/4115/4777704064_7c9eacc798_b.jpg",
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy."
-    },
-    {
-        category: 2,
-        title: "Joe",
-        price: 5.3,
-        stock: 2,
-        imageUrl: "https://live.staticflickr.com/4027/4518144704_273b98ef81_w.jpg",
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy."
-    },
-    {
-        category: 2,
-        title: "Doen",
-        price: 34.5,
-        stock: 5,
-        imageUrl: "https://live.staticflickr.com/8471/8076906297_1c3fcd7961_n.jpg",
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy."
-    },
-    {
-        category: 2,
-        title: "Doe",
-        price: 33.5,
-        stock: 7,
-        imageUrl: "https://live.staticflickr.com/7888/46485996115_90ef86c2cf_w.jpg",
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy."
-    },
-    {
-        category: 3,
-        title: "Do en1b",
-        price: 77.5,
-        stock: 6,
-        imageUrl: "https://live.staticflickr.com/3737/12410422355_13ed826e59_b.jpg",
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy."
-    },
-    {
-        category: 3,
-        title: "Doe n2b",
-        price: 145.5,
-        stock: 4,
-        imageUrl: "https://live.staticflickr.com/3786/8783496185_eede57d206_b.jpg",
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy."
-    },
-    {
-        category: 1,
-        title: "Doe n3",
-        price: 93.5,
+        title: "Wheat Bread Loaf",
+        subheader: "Rs. 89",
+        price: 100,
         stock: 3,
-        imageUrl: "https://live.staticflickr.com/3268/2394450343_b250eb2666_b.jpg",
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy."
+        imageUrl: "7.png",
+        description: "A great alternative to refined flour breads, our Wheat Bread Loaf is made using 70% whole wheat flour and has a rich nutty flavour. Best enjoyed plain, toasted or as a sandwich."
     },
     {
         category: 1,
-        title: "Do en4",
-        price: 44.5,
+        title: "French Baguette (1 Pc)",
+        subheader: "Rs. 78",
+        price: 445,
         stock: 1,
-        imageUrl: "https://live.staticflickr.com/4753/40483032541_02f3f584a6_b.jpg",
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy."
+        imageUrl: "8.png",
+        description: "Our French baguette is characterised by a crisp outer crust, chewy texture and a soft crumb."
+    },
+    {
+        category: 2,
+        title: "TORTA RED VELVET",
+        subheader: "CAKE STORE STGO",
+        price: 9000,
+        stock: 0,
+        imageUrl: "1.png",
+        description: "Bizcocho rojo con un toque de cacao. Relleno de Cheesecream y ganache de chocolate"
+    },
+    {
+        category: 2,
+        title: "TORTA GLOW",
+        subheader: "CAKE STORE STGO",
+        price: 20000,
+        stock: 2,
+        imageUrl: "2.png",
+        description: "Bizcocho y Relleno a elección, incluye decoración. Decorada con buttercream."
+    },
+    {
+        category: 2,
+        subheader: "CAKE STORE STGO",
+        title: "TORTA MARQUESA DE CHOCOLATE",
+        price: 7000,
+        stock: 5,
+        imageUrl: "3.png",
+        description: "Marquesa de Chocolate para 4 - 6 y 12 Personas. Crema de Chocolate con Galleta Dulce y Leche Condensada."
+    },
+    {
+        category: 2,
+        title: "TORTA CON FLORES Y TOPPER",
+        subheader: "CAKE STORE STGO",
+        price: 35000,
+        stock: 7,
+        imageUrl: "4.png",
+        description: "Torta decorada con Buttercream y Flores Naturales. Sabor de bizcocho y relleno a elección."
+    },
+    {
+        category: 3,
+        title: "CAJA DE MINI CHEESECAKE DELUXE",
+        subheader: "CAKE STORE STGO",
+        price: 15000,
+        stock: 6,
+        imageUrl: "5.png",
+        description: "8 mini cheesecake y 1 botella de Vino Tinto, Champagne o Cerveza."
+    },
+    {
+        category: 3,
+        title: "CAJA SORPRESA",
+        subheader: "CAKE STORE STGO",
+        price: 8500,
+        stock: 4,
+        imageUrl: "6.png",
+        description: "Caja pequeña incluye 2 Porciones (Tres leches, Tres leches de chocolate, Marquesa de chocolate, Marquesa de oreo, Marquesa de maracuyá, Torta Quesillo, Choco Quesillo)."
     },
 ];

@@ -1,7 +1,7 @@
 
 
 import { db } from './firebase'
-import { query, collection, addDoc, getDocs, doc, deleteDoc } from 'firebase/firestore/lite';
+import { query, collection, addDoc, getDocs, getDoc, doc, deleteDoc } from 'firebase/firestore/lite';
 import { PRODUCTS } from './data'
 
 export const setUp = async () => {
@@ -25,6 +25,6 @@ const getCollectionReference = async (collectionName) => {
     const querySnapshot = await getDocs(collectionRef);
     querySnapshot.forEach(async( doc) => {
         const customer = await getDoc(doc.data().customer);
-        console.log("customer", docSnap2.data())
+        console.log("customer", customer.data())
     });
 }
