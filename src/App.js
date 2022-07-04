@@ -14,8 +14,6 @@ import './services/firebase'
 import ProductsListContainer from './views/products/ListContainer'
 import ProductsDetailContainer from './views/products/DetailContainer'
 import CartList from './views/products/CartList'
-// import { setUp } from './services/setUpStore'
-// setUp(); 
 function App() {
   return (
     <BrowserRouter>
@@ -35,7 +33,4 @@ function App() {
     </BrowserRouter>
   );
 }
-
 export default App;
- // https://docs.google.com/document/d/1pj-gatjxqk7pv8uRv4gN3HBFVuQj3FhGQxwNy1gA2Uk/edit 
-// sx={{ mt: 4, mb: 4, pl: { xs:1}, mr: {xs:1 } }}
