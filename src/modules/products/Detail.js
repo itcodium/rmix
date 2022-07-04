@@ -27,8 +27,8 @@ const ProductDetail = ({ product }) => {
     }
    
     const getActions = (product) => {
-        return <Box sx={{ display: 'flex', justifyContent: 'space-between', }} disableSpacing>
-            <Typography variant="h4" component="p">
+        return <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} disableSpacing>
+            <Typography variant="h6" component="p">
                 $ {product.price}
             </Typography>
             <Button  disabled={!cartProduct} variant="outlined" >
@@ -39,8 +39,8 @@ const ProductDetail = ({ product }) => {
         </Box>
     }
     return <Grid item xs={12} sm={12} md={6} lg={6}>
-        <Card>
-            <Typography sx={{ m: 1, ml: 2 }} variant="h4" gutterBottom>{product.title}</Typography>
+        <Card sx={{p:1}} >
+            <Typography variant="h6" gutterBottom>{product.title}</Typography>
             <CardContent sx={{ display: 'flex', justifyContent: 'center' }}>
                 <Box sx={{ flex: 1 }}>
                     <img width="100%" alt="" src={product.imageUrl} />
@@ -49,7 +49,7 @@ const ProductDetail = ({ product }) => {
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
-                    flex: 1, pl: 1
+                    flex: 1, ml:1
                 }}>
                     <Box elevation={0}>
                         <Typography variant="p" color="text.secondary">

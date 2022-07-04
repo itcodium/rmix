@@ -1,5 +1,4 @@
 import React from 'react';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Cart from '../../modules/products/Cart';
 import Alert from '@mui/material/Alert';
@@ -20,10 +19,6 @@ const CartList = () => {
         }
     }, [])
     return (<>
-        {!order.id && cart.length > 0 && <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <Typography sx={{ p: 2, }} variant="h4" gutterBottom>Cart List</Typography>
-        </Box>}
-
         <Box>
             {!order.id && <Cart user={user} items={cart}></Cart>}
             {order.id && <Alert sx={{ mt: 2, textAlign: "center" }} severity="success">Your order number is: <strong>{order.id}</strong>

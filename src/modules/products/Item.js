@@ -4,7 +4,6 @@ import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
-import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { Link } from "react-router-dom";
@@ -31,14 +30,14 @@ const ProductItem = ({ product }) => (
                         <Typography variant="p" color="text.secondary">
                             {product.description}
                         </Typography>
-                        {product.stock === 0 && <Alert sx={{ mt: 4 }} severity="warning">Sin stock</Alert>}
+                        {product.stock === 0 && <Alert sx={{ mt: 1, mb:1 }} severity="warning">Sin stock</Alert>}
                     </Box>
-                    <CardActions sx={{ display: 'flex', justifyContent: 'space-between', }} disableSpacing>
-                        <Typography variant="h5" >$ {product.price} </Typography>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                        <Typography variant="h6" >$ {product.price} </Typography>
                         <Button variant="outlined" >
                             <Link className='link' to={"/productDetail/" + product.id} >Detail</Link>
                         </Button>
-                    </CardActions>
+                    </Box>
                 </Box>
             </CardContent>
 
