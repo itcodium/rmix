@@ -11,7 +11,7 @@ import mainLogo from '../../assets/logo.png';
 import categories from "../../data/categories.json";
 import Button from '@mui/material/Button';
 import './NavBar.css';
-import CartWidget from '../../modules/products/CartWidget'
+import  { CartWidget } from '../../modules/e-commerce/index';
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
