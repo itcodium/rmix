@@ -27,7 +27,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <Container disableGutters={true} maxWidth="lg">
           <NavBar></NavBar>
-          <Container sx={{ pl: { xs: 1 }, pr: { xs: 1 } }} disableGutters={true} fixed>
+          <Container sx={{ pl: { xs: 1 }, pr: { xs: 1 }, minHeight: '40vh' }} disableGutters={true} fixed >
             <Routes>
               <Route path="" element={<ProductsListContainer></ProductsListContainer>}></Route>
               <Route path="/:id" element={<ProductsListContainer></ProductsListContainer>}></Route>
