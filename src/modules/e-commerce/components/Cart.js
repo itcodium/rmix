@@ -1,20 +1,27 @@
-import React from 'react';
-import { useDispatch } from 'react-redux'
+import React, { useEffect } from 'react';
+import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Card from '@mui/material/Card';
-import CardActionArea from '@mui/material/CardActionArea';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import { removeItem, getTotal } from '../reducers/cart';
+import CircularProgress from '@mui/material/CircularProgress';
+import Divider from '@mui/material/Divider';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from "react-router-dom";
+import CartItem from './CartItem';
+import { getTotal } from '../reducers/cart';
+import { fetch, post } from '../reducers/orders';
+import STATUS from '../../../store/status';
 import categories from "../../../data/categories.json";
 
-const Cart = ({ items }) => {
+const Cart = ({ items, user }) => {
     const dispatch = useDispatch();
+    const status = useSelector(state => state.orders.status);
+    const error = useSelector(state => state.orders.error);
+    useEffect(() => {
+        dispatch(fetch(items));
+    }, [])
+
     const list = [];
     categories.forEach((category) => {
         const byCategory = items.filter(item => item.category === category.id);
@@ -24,82 +31,68 @@ const Cart = ({ items }) => {
             products: byCategory
         });
     })
+    const total = getTotal(items);
+    const sendOrder = () => {
+        dispatch(post({ customer: user, total, items }));
+    }
 
     return <>
         {
             list.map((category, index) => (
-                category.products.length > 0 && <>
-                    {
-                        category.products.map((product, ixp) => (
-                            <Grid item sx={{ pl: 0, pr: 1, pb: 1 }}>
-                                <CardActionArea component="a" href="#">
-                                    <Card sx={{ display: 'flex' }}>
-                                        <CardMedia
-                                            component="img"
-                                            sx={{ width: 160, display: { sm: 'block' } }}
-                                            image={product.imageUrl}
-                                            alt={product.imageUrl}
-                                        />
-                                        <CardContent sx={{ flex: 1, pl: 1, pt: 0 }}>
-                                            <Typography component="h3" variant="h5">
-                                                {product.title}
-                                            </Typography>
-
-                                        </CardContent>
-                                        <Box
-                                            sx={{
-                                                p: 1,
-                                                alignItems: 'center',
-                                                display: 'flex',
-                                            }}
-                                        >
-                                            <Typography sx={{ mb: 1, mr: 1 }}>
-                                                ${product.price} x {product.units}
-                                            </Typography>
-                                        </Box>
-                                        <Box
-                                            sx={{
-                                                p: 1,
-                                                alignItems: 'center',
-                                                display: 'flex',
-                                            }}
-                                        >
-                                            <IconButton aria-label="Delete"
-                                                onClick={() => dispatch(removeItem(product))} component="span">
-                                                <DeleteIcon />
-                                            </IconButton>
-                                        </Box>
-                                    </Card>
-                                </CardActionArea>
-                            </Grid>
-                        ))
-                    }
-                    <Box sx={{
-                        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                        mt: 0, mr: 3, mt: 0, mb: 3,
-                        textAlign: 'right',
-                    }}>
-                        <Typography component="h3" variant="h6">{category.name} </Typography>
-                        <Typography component="h3" variant="h6">${category.subTotal} </Typography>
-                    </Box>
-                </>
+                category.products.length > 0 && (
+                    <Grid key={index} item>
+                        {
+                            category.products.map((product, ixp) => (
+                                <CartItem key={ixp} category={category} product={product}></CartItem>
+                            ))
+                        }
+                        <Divider sx={{ mb: 1 }} />
+                    </Grid>)
             ))
-
         }
-        <Box
-            sx={{
-                p: 3,
-                mt: 2,
-                textAlign: 'right',
-                backgroundColor: '#eee',
-            }}
-        >
-            {items.length > 0 ?
-                <Typography component="h2" variant="h5"> Total: $ {getTotal(items)}</Typography>
-                : <> <Typography sx={{ mb: 3 }} component="h2" variant="h5"> Cart is empty </Typography>
-                    <Button variant="outlined" href="/">Buscar</Button> </>
-            }
-        </Box>
+        <Container maxWidth="xs" sx={{ m: '0 auto', mb: 1 }}>
+            <Grid container>{
+                list.filter(item => item.subTotal > 0).map((item, ixp) => (
+                    <React.Fragment key={item.name}>
+                        <Grid item xs={6}>
+                            <Typography sx={{ m: 0, p: 0 }} variant="overline" gutterBottom>{item.name}</Typography>
+                        </Grid>
+                        <Grid item xs={6} sx={{ textAlign: 'right' }}>
+                            <Typography variant="overline" gutterBottom>$ {item.subTotal}</Typography>
+                        </Grid>
+                    </React.Fragment>
+                ))}
+                {total > 0 && <React.Fragment >
+                    <Grid item xs={6}>
+                        <Typography variant="button" gutterBottom>Total</Typography>
+                    </Grid>
+                    <Grid item xs={6} sx={{ textAlign: 'right' }}>
+                        <Typography variant="button" gutterBottom>$ {total}</Typography>
+                    </Grid>
+                </React.Fragment>
+                }
+            </Grid>
+        </Container>
+        {
+            items.length > 0 && <Box sx={{ textAlign: 'center' }} >
+                <Divider sx={{ mb: 1 }} />
+                <Button variant="contained" disabled={status === STATUS.LOADING} onClick={() => { sendOrder() }} >
+                    Enviar Orden
+                </Button>
+            </Box>
+        }
+
+        {items.length === 0 && <Box sx={{ textAlign: 'center' }}>
+            <Typography sx={{ mb: 3 }} component="h2" variant="h5"> Cart is empty </Typography>
+            <Button variant="outlined" >
+                <Link to='/' >
+                    <Typography sx={{ textDecoration: 'underline white', color:"#1769aa" }} >Buscar</Typography>
+                </Link>
+            </Button>
+        </Box>}
+        {status === STATUS.SUCCESS && null}
+        {status === STATUS.LOADING && <Box sx={{ p: 3, display: 'block', textAlign: 'center', }}><CircularProgress /> </Box>}
+        {status === STATUS.ERROR && <Typography color="error" variant="overline" display="block" gutterBottom>{error.message}</Typography>}
     </>
 }
 export default Cart;

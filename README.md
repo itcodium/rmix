@@ -78,3 +78,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
     https://mui.com/material-ui/getting-started/installation/
     
+# Deploy Site
+firebase deploy --only hosting:rmix

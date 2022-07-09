@@ -8,15 +8,18 @@ import {
 
 import { ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
-import NavBar from './components/NavBar/NavBar'
-import { theme } from './App.style'
+import {
+  NavBar,
+  Footer,
+  AplicationText
+} from './components/index';
+import { theme } from './App.style';
 
-import  {
+import {
   ProductsListContainer,
   ProductsDetailContainer,
   CartListContainer,
 } from './modules/e-commerce/index';
-
 
 function App() {
   return (
@@ -24,14 +27,19 @@ function App() {
       <ThemeProvider theme={theme}>
         <Container disableGutters={true} maxWidth="lg">
           <NavBar></NavBar>
-          <Container disableGutters={true} fixed sx={{ mt: 4, mb: 4, pl: { xs:1}, mr: {xs:1 } }}>
+          <Container sx={{ pl: { xs: 1 }, pr: { xs: 1 } }} disableGutters={true} fixed>
             <Routes>
-            <Route path="" element={<ProductsListContainer></ProductsListContainer>}></Route>
-            <Route path="/:id" element={<ProductsListContainer></ProductsListContainer>}></Route>
-            <Route path="/productDetail/:id" element={<ProductsDetailContainer></ProductsDetailContainer>}></Route>
-            <Route path="/cart" element={<CartListContainer></CartListContainer>}></Route>
+              <Route path="" element={<ProductsListContainer></ProductsListContainer>}></Route>
+              <Route path="/:id" element={<ProductsListContainer></ProductsListContainer>}></Route>
+              <Route path="/productDetail/:id" element={<ProductsDetailContainer></ProductsDetailContainer>}></Route>
+              <Route path="/cart" element={<CartListContainer></CartListContainer>}></Route>
             </Routes>
           </Container>
+          <Footer
+            sections={AplicationText.footer}
+            social={AplicationText.social}
+            copyright={AplicationText.copyright}
+          ></Footer>
         </Container>
       </ThemeProvider>
     </BrowserRouter>
@@ -39,17 +47,7 @@ function App() {
 }
 
 export default App;
-/*
-<Router>
-            <Routes>
-              <Route key="10" path="/" >
-                <ProductsListContainer greeting={"Hello!"}></ProductsListContainer>
-              </Route>
-              <Route key="20" path="" >
-                <ProductsListContainer greeting={"Hello!"}></ProductsListContainer>
-              </Route>
-              <Route key="30" path="/test" >
-              </Route>
-            </Routes>
-          </Router>
-*/
+ // https://docs.google.com/document/d/1pj-gatjxqk7pv8uRv4gN3HBFVuQj3FhGQxwNy1gA2Uk/edit
+// sx={{ mt: 4, mb: 4, pl: { xs:1}, mr: {xs:1 } }}
+
+// 

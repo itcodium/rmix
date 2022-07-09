@@ -4,58 +4,43 @@ import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
-import CardActions from '@mui/material/CardActions';
-import IconButton from '@mui/material/IconButton';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
+import Alert from '@mui/material/Alert';
+import { Link } from "react-router-dom";
 
 const ProductItem = ({ product }) => (
     <Grid item xs={12} sm={12} md={6} lg={6}>
-        <Card sx={{ p: 2 }}>
+        <Card>
             <CardHeader
                 title={product.title}
-                subheader="September 14, 2016"
+                subheader={product.subheader}
             />
-            <CardContent sx={{
-                display: 'inline',
-                alignItems: 'center',
-                justifyContent: 'center',
-                m: 2
-            }}>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        marginLeft: 'auto',
-                        justifyContent: 'center',
-                        m: 0
-                    }}
-                >
-                    <Paper sx={{width:'50%',  margin: '0 auto 0 auto'}}  elevation={0} >
-                        <img width="360" alt="" src={product.imageUrl} />
-                    </Paper>
-                    <Paper elevation={0} sx={{pl:2, pr:0}}>
+            <CardContent sx={{ display: 'flex', justifyContent: 'center' }}>
+                <Box sx={{ flex: 1 }}>
+                    <img width="100%" alt="" src={product.imageUrl} />
+                </Box>
+                <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    flex: 1, pl: 1
+                }}>
+                    <Box elevation={0}>
                         <Typography variant="p" color="text.secondary">
-                            This impressive paella is a perfect party dish and a fun meal to cook
-                            together with your guests. Add 1 cup of frozen peas along with the mussels,
-                            if you like.
+                            {product.description}
                         </Typography>
-                    </Paper>
-
+                        {product.stock === 0 && <Alert sx={{ mt: 1, mb:1 }} severity="warning">Sin stock</Alert>}
+                    </Box>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                        <Typography variant="h6" >$ {product.price} </Typography>
+                        <Button variant="outlined" >
+                            <Link className='link' to={"/productDetail/" + product.id} >Detail</Link>
+                        </Button>
+                    </Box>
                 </Box>
             </CardContent>
-            <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                </IconButton>
-                <Typography variant="h5" component="a">
-                    $ {product.price}
-                </Typography>
-                <Button href={"/productDetail/" + product.id} color="primary" >
-                    Detail
-                </Button>
-            </CardActions>
+
         </Card>
     </Grid>
 )

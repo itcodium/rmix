@@ -2,13 +2,17 @@ import { combineReducers } from 'redux'
 import { 
     productsReducer, 
     productsDetailReducer, 
-    cartReducer
+    cartReducer,
+    ordersReducer,
+    userReducer
 } from './modules/e-commerce/index';
 
 const appReducer = combineReducers({
     products: productsReducer,
     productsDetail: productsDetailReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    orders: ordersReducer,
+    user: userReducer,
 });
 
 const reducerRoot = (state, action) => {

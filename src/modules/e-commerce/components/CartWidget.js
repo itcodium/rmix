@@ -20,13 +20,17 @@ const CartWidget = () => {
     const cart = useSelector(state => state.cart.data);
     let total = countCartUnits(cart)
     return (
-        <Link component="button" to={"/cart"}>
+        total > 0 ? <Link component="button" to={"/cart"}>
             <IconButton aria-label="cart">
                 <StyledBadge badgeContent={total} color="secondary">
                     <ShoppingCartIcon />
                 </StyledBadge>
             </IconButton>
-        </Link>
+        </Link> :
+        <StyledBadge badgeContent={total}>
+            <ShoppingCartIcon color="disabled" />
+        </StyledBadge>
+            
     )
 }
 
