@@ -14,18 +14,19 @@ import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
 import mainLogo from '../../assets/logo.png';
 import categories from "../../data/categories.json";
-import  { CartWidget } from '../../modules/e-commerce/index';
+import { CartWidget } from '../../modules/e-commerce/index';
+import LanguageSelector  from '../LanguageSelector/LanguageSelector';
 
-const NavBar = () => {
+const NavBar = ({ languages }) => {
     const [open, setOpen] = React.useState(false);
     const toggleDrawer = (open) => () => {
         setOpen(open)
     };
 
     const getCategories = (display) => {
-        return <MenuList sx={{display:display}}> {
+        return <MenuList sx={{ display: display }}> {
             categories.map((item, i) => (
-                <MenuItem   key={i} >
+                <MenuItem key={i} >
                     <Link to={"/" + item.id} className='link' >
                         <Typography variant="button">{item.name}</Typography>
                     </Link>
@@ -37,12 +38,12 @@ const NavBar = () => {
         <Hidden mdUp>
             <Drawer open={open} onClose={toggleDrawer(false)}>
                 <Box
-                    sx={{ width: 250}}
+                    sx={{ width: 250 }}
                     role="presentation"
                     onClick={toggleDrawer(false)}
                     onKeyDown={toggleDrawer(false)}
                 >
-                    <Box sx={{ textAlign: 'center',p: 1 }}>
+                    <Box sx={{ textAlign: 'center', p: 1 }}>
                         <Link to={"/"} >
                             <img width='140' alt="" flex='1' align="center" src={mainLogo}></img>
                         </Link>
@@ -64,6 +65,7 @@ const NavBar = () => {
                 </Box>
             </Hidden>
             <Box>
+                <LanguageSelector languages={languages}></LanguageSelector>
                 <CartWidget />
                 <Hidden mdDown>
                     <IconButton sx={{ pl: 2 }} color="inherit" aria-label="SideBarMenu">

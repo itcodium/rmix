@@ -33,10 +33,10 @@ function Footer({ sections, social, copyright }) {
         if (data.length === 3 || data.length === 9) {
             return 4;
         }
-        if (data.length === 4 || data.length >= 8 ) {
+        if (data.length === 4 || data.length >= 8) {
             return 3;
         }
-        
+
         if (data.length >= 5) {
             return 4;
         }
@@ -52,13 +52,13 @@ function Footer({ sections, social, copyright }) {
         </Grid>)
     }
 
-    return <Grid container sx={{ mt: 2 }}>
-        <Grid item xs={12} sm={12} md={12} align="center"  sx={{ mb: 1 }}>
+    return <Grid container sx={{ mt: 4 }}>
+        <Grid item xs={12} sm={12} md={12} align="center" sx={{ mb: 2 }}>
             <a href="/#">
                 <img width='140' alt="" flex='1' src={mainLogo}></img></a>
         </Grid>
 
-        <Grid item xs={12} sm={12} md={12} sx={{ mb: 1 }}>
+        <Grid item xs={12} sm={12} md={12} sx={{ mb: 2 }}>
             <Typography variant="h6" align="center" gutterBottom>
                 FOOTER CONTENT INFO
             </Typography>

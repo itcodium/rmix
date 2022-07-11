@@ -26,8 +26,8 @@ function App() {
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <Container disableGutters={true} maxWidth="lg">
-          <NavBar></NavBar>
-          <Container sx={{ pl: { xs: 1 }, pr: { xs: 1 }, minHeight: '40vh' }} disableGutters={true} fixed >
+          <NavBar languages = {AplicationText.lang}></NavBar>
+          <Container sx={{ pl: { xs: 1 }, pr: { xs: 1 }, minHeight: '70vh' }} disableGutters={true} fixed >
             <Routes>
               <Route path="" element={<ProductsListContainer></ProductsListContainer>}></Route>
               <Route path="/:id" element={<ProductsListContainer></ProductsListContainer>}></Route>
