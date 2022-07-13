@@ -15,7 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import mainLogo from '../../assets/logo.png';
 import categories from "../../data/categories.json";
 import { CartWidget } from '../../modules/e-commerce/index';
-import LanguageSelector  from '../LanguageSelector/LanguageSelector';
+import LanguageSelector from '../LanguageSelector/LanguageSelector';
 
 const NavBar = ({ languages }) => {
     const [open, setOpen] = React.useState(false);
@@ -24,7 +24,7 @@ const NavBar = ({ languages }) => {
     };
 
     const getCategories = (display) => {
-        return <MenuList sx={{ display: display }}> {
+        return <MenuList sx={{ display }}> {
             categories.map((item, i) => (
                 <MenuItem key={i} >
                     <Link to={"/" + item.id} className='link' >
@@ -33,6 +33,11 @@ const NavBar = ({ languages }) => {
                 </MenuItem>
             ))
         }</MenuList>
+    }
+    const getLogo = () => {
+        return <Link to={"/"} >
+            <img width='140' alt="" flex='1' align="center" src={mainLogo}></img>
+        </Link>
     }
     return <AppBar position="static" sx={{ mb: 2 }} color="transparent">
         <Hidden mdUp>
@@ -44,9 +49,7 @@ const NavBar = ({ languages }) => {
                     onKeyDown={toggleDrawer(false)}
                 >
                     <Box sx={{ textAlign: 'center', p: 1 }}>
-                        <Link to={"/"} >
-                            <img width='140' alt="" flex='1' align="center" src={mainLogo}></img>
-                        </Link>
+                        { getLogo() }
                     </Box>
                     <Divider />
                     {getCategories('block')}
@@ -56,9 +59,7 @@ const NavBar = ({ languages }) => {
         </Hidden>
 
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Link to={"/"}>
-                <img width='140' alt="" flex='1' align="center" src={mainLogo}></img>
-            </Link>
+            { getLogo() }
             <Hidden mdDown>
                 <Box>
                     {getCategories('flex')}
